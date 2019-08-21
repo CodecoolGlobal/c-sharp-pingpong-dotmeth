@@ -20,9 +20,33 @@ namespace PingPong
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Ellipse ball;
+
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void spawnBall(object sender, RoutedEventArgs e)
+        {   
+            if (ball != null)
+            {
+                return;
+            }
+            ball = new Ellipse();
+            ball.Height = 20;
+            ball.Width = 20;
+            ball.HorizontalAlignment = HorizontalAlignment.Center;
+            ball.VerticalAlignment = VerticalAlignment.Center;
+            ball.Stroke = Brushes.Black;
+            ball.Fill = Brushes.LightSalmon;
+            grid.Children.Add(ball);
+        }
+
+        private void deleteBall(object sender, RoutedEventArgs e)
+        {
+            grid.Children.Remove(ball);
+            ball = null;
         }
     }
 }
