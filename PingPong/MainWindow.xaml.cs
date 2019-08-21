@@ -21,7 +21,7 @@ namespace PingPong
     public partial class MainWindow : Window
     {
 
-        TextBox score;
+        private TextBox score;
         public MainWindow()
         {
             InitializeComponent();
@@ -32,7 +32,7 @@ namespace PingPong
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            
+
             score = this.FindName("Score") as TextBox;
 
 
@@ -52,20 +52,5 @@ namespace PingPong
             int scoreValue = int.Parse(score.Text.Split(' ')[1]) + 1;
             score.Text = scoreName + " " + scoreValue.ToString();
         }
-
-
-
-        //private void Score_TextChange(object sender, KeyEventArgs e)
-        //{
-        //    if (e.KeyCode == Keys.Enter)
-        //    {
-        //        var score = sender as TextBox;
-        //        score.Text =
-
-        //    }
-
-        //}
-
-
     }
 }
