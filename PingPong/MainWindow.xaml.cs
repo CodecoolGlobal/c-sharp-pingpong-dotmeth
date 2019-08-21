@@ -87,7 +87,6 @@ namespace PingPong
                 Canvas.SetLeft(Paddle, Canvas.GetLeft(Paddle) + 10);
             }
         }
-
         private void PauseGame()
         {
             throw new NotImplementedException();
