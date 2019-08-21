@@ -22,20 +22,21 @@ namespace PingPong
     public partial class MainWindow : Window
     {
 
-        private TextBox score;
-        private TextBox pauseInfo;
+        private TextBlock score;
+        private TextBlock pauseInfo;
         public MainWindow()
         {
             InitializeComponent();
             KeyDown += new KeyEventHandler(Paddle_Move);
+            KeyDown += new KeyEventHandler(KeyPressed);
 
         }
 
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            score = this.FindName("Score") as TextBox;
-            pauseInfo = this.FindName("pauseText") as TextBox;
+            score = this.FindName("Score") as TextBlock;
+            pauseInfo = this.FindName("pauseText") as TextBlock;
         }
 
         private void KeyPressed(object sender, KeyEventArgs e)
