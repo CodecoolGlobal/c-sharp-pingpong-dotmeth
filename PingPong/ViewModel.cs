@@ -43,7 +43,7 @@ namespace PingPong
             set
             {
                 paddleXPos = value;
-                OnPropertyRaised("PaddlesXPos");
+                OnPropertyRaised("PaddleXPos");
             }
         }
     }

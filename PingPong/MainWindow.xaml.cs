@@ -28,6 +28,7 @@ namespace PingPong
         private ViewModel viewModel = new ViewModel();
         private double angle = 150;
         private double speed = 4;
+        private int paddleSpeed = 9;
 
         public MainWindow()
         {
@@ -65,6 +66,23 @@ namespace PingPong
 
         private void KeyPressed(object sender, KeyEventArgs e)
         {
+            if (e.Key == Key.Right)
+            {
+                if (viewModel.PaddleXPos > (Canvas.ActualWidth - 197))
+                {
+                    viewModel.PaddleXPos = (int)Canvas.ActualWidth - 197;
+                }
+                viewModel.PaddleXPos += paddleSpeed;
+            }
+            else if (e.Key == Key.Left)
+            {
+                if (viewModel.PaddleXPos < 0)
+                {
+                    viewModel.PaddleXPos = 0;
+                }
+                viewModel.PaddleXPos -= paddleSpeed;
+            }
+
             if (e.Key == Key.Enter)
             {
                 IncreaseScore();
@@ -101,6 +119,6 @@ namespace PingPong
         //{
         //    throw new NotImplementedException();
         //}
-
+        
     }
 }
