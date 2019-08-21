@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -23,13 +24,38 @@ namespace PingPong
 
         private TextBox score;
         private TextBox pauseInfo;
+        private DispatcherTimer timer;
+        private ViewModel viewModel = new ViewModel();
+        private double angle = 150;
+        private double speed = 4;
+
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = viewModel;
 
-
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromMilliseconds(10);
+            timer.Start();
+            timer.Tick += dispatcherTimer_Tick;
         }
 
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            if (viewModel.BallYPos <= 0)
+                angle = angle + (180 - 2 * angle);
+            if (viewModel.BallYPos >= Canvas.ActualHeight - 25)
+                angle = angle + (180 - 2 * angle);
+            if (viewModel.BallXPos <= 0)
+                angle = angle + (360 - 2 * angle);
+            if (viewModel.BallXPos >= Canvas.ActualWidth - 35)
+                angle = angle + (360 - 2 * angle);
+
+            double radians = (Math.PI / 180) * angle;
+            Vector vector = new Vector { X = Math.Sin(radians), Y = -Math.Cos(radians) };
+            viewModel.BallXPos += vector.X * speed;
+            viewModel.BallYPos += vector.Y * speed;
+        }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -46,7 +72,7 @@ namespace PingPong
             else if (e.Key == Key.Space)
             {
                 Visibility status = pauseInfo.Visibility;
-                PauseGame();
+                //PauseGame();
                 changePauseTextVisibility(status);
             }
         }
@@ -71,10 +97,10 @@ namespace PingPong
             score.Text = scoreName + " " + scoreValue.ToString();
         }
 
-        private void PauseGame()
-        {
-            throw new NotImplementedException();
-        }
+        //private void PauseGame()
+        //{
+        //    throw new NotImplementedException();
+        //}
 
     }
 }
