@@ -28,7 +28,7 @@ namespace PingPong
         private ViewModel viewModel = new ViewModel();
         private double angle = 150;
         private double speed = 4;
-        private int paddleSpeed = 9;
+        private int paddleSpeed = 20;
 
         public MainWindow()
         {
@@ -46,11 +46,19 @@ namespace PingPong
             if (viewModel.BallYPos <= 0)
                 angle = angle + (180 - 2 * angle);
             if (viewModel.BallYPos >= Canvas.ActualHeight - 25)
-                angle = angle + (180 - 2 * angle);
+                //angle = angle + (180 - 2 * angle);
+                timer.Stop();
             if (viewModel.BallXPos <= 0)
                 angle = angle + (360 - 2 * angle);
             if (viewModel.BallXPos >= Canvas.ActualWidth - 35)
                 angle = angle + (360 - 2 * angle);
+
+            if(CheckCollision())
+            {
+                IncreaseScore();
+                angle = angle + (180 - 2 * angle);
+                speed += 0.1;
+            }
 
             double radians = (Math.PI / 180) * angle;
             Vector vector = new Vector { X = Math.Sin(radians), Y = -Math.Cos(radians) };
@@ -119,6 +127,9 @@ namespace PingPong
         //{
         //    throw new NotImplementedException();
         //}
-        
+        private bool CheckCollision()
+        {
+            return viewModel.BallYPos > 350 && (viewModel.BallXPos > viewModel.PaddleXPos - 10 && viewModel.BallXPos < viewModel.PaddleXPos + 197);
+        }
     }
 }
