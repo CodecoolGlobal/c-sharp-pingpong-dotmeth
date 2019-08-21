@@ -20,6 +20,9 @@
                 <Rectangle Name="Paddle" Fill="#FFCB6713" Height="14" Margin="0,0,0,0" Stroke="Black" Width="197" Canvas.Left="100"/>
             </Canvas>
             <Rectangle Fill="#FFC313CB" HorizontalAlignment="Left" Height="14" Margin="111,242,0,0" Stroke="Black" VerticalAlignment="Top" Width="14" Grid.Column="1"/>
+            <TextBox x:Name="Score"  HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Score: 0" VerticalAlignment="Top" Height="47" Width="98" FontSize="14" TextAlignment="Center" Foreground="#FFCBBBBB" Background="{x:Null}" BorderThickness="0"/>
+            <TextBox x:Name="pauseText" HorizontalAlignment="Left" Visibility="Collapsed" Height="122" Margin="15,134,0,0" Padding="50" TextWrapping="Wrap" Text="Press SPACE to continue" VerticalAlignment="Top" Width="274" TextAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2"/>
+
         </Grid>
     </Border>
 </Window>
