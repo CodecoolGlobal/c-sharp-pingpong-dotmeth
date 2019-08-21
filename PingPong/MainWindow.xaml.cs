@@ -22,6 +22,7 @@ namespace PingPong
     {
 
         private TextBox score;
+        private TextBox pauseInfo;
         public MainWindow()
         {
             InitializeComponent();
@@ -32,10 +33,8 @@ namespace PingPong
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
             score = this.FindName("Score") as TextBox;
-
-
+            pauseInfo = this.FindName("pauseText") as TextBox;
         }
 
         private void KeyPressed(object sender, KeyEventArgs e)
@@ -44,6 +43,25 @@ namespace PingPong
             {
                 IncreaseScore();
             }
+            else if (e.Key == Key.Space)
+            {
+                Visibility status = pauseInfo.Visibility;
+                PauseGame();
+                changePauseTextVisibility(status);
+            }
+        }
+
+        private void changePauseTextVisibility(Visibility status)
+        {
+            if (status == Visibility.Visible)
+            {
+                pauseInfo.Visibility = Visibility.Collapsed;
+            }
+            else if (status == Visibility.Collapsed)
+            {
+                pauseInfo.Visibility = Visibility.Visible;
+            }
+
         }
 
         private void IncreaseScore()
@@ -52,5 +70,11 @@ namespace PingPong
             int scoreValue = int.Parse(score.Text.Split(' ')[1]) + 1;
             score.Text = scoreName + " " + scoreValue.ToString();
         }
+
+        private void PauseGame()
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }
