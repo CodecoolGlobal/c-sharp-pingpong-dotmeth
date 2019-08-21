@@ -5,6 +5,7 @@ namespace PingPong
     class ViewModel : INotifyPropertyChanged
     {
         private Ball ball = new Ball(240, 200);
+        private int paddleXPos = 0;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -33,6 +34,16 @@ namespace PingPong
             {
                 ball.YPos = value;
                 OnPropertyRaised("BallYPos");
+            }
+        }
+
+        public int PaddleXPos
+        {
+            get { return paddleXPos; }
+            set
+            {
+                paddleXPos = value;
+                OnPropertyRaised("PaddlesXPos");
             }
         }
     }
