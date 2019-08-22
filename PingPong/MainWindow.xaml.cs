@@ -48,8 +48,20 @@ namespace PingPong
             if (viewModel.BallYPos <= 0)
                 angle = angle + (180 - 2 * angle);
             if (viewModel.BallYPos >= Canvas.ActualHeight - 25)
+            {
                 //angle = angle + (180 - 2 * angle);
                 timer.Stop();
+                if (CustomMessageBox.ShowYesNo("Congratulations! You reached " + int.Parse(score.Text.Split(' ')[1]) + "points.",
+                                                     "Game Over",
+                                                     "New game",
+                                                     "Quit") == MessageBoxResult.Yes)
+                {
+                }
+                else
+                {
+                this.Close();
+                }
+            }
             if (viewModel.BallXPos <= 0)
                 angle = angle + (360 - 2 * angle);
             if (viewModel.BallXPos >= Canvas.ActualWidth - 35)
