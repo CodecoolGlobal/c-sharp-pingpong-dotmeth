@@ -56,6 +56,7 @@ namespace PingPong
                                                      "New game",
                                                      "Quit") == MessageBoxResult.Yes)
                 {
+                    //restart game
                 }
                 else
                 {
