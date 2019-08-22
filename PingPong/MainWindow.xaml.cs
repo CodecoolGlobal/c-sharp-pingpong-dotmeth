@@ -18,8 +18,8 @@ namespace PingPong
         private DispatcherTimer timer;
         private ViewModel viewModel;
         private double angle = RandomGenerator.GetRandomNumber(120, 240);
-        private double speed = 4;
-        private int paddleSpeed = 20;
+        private double speed;
+        private int paddleSpeed;
 
         public MainWindow()
         {
@@ -31,6 +31,8 @@ namespace PingPong
         {
             score = this.FindName("Score") as TextBox;
             score.Text = "Score: 0";
+            speed = 4;
+            paddleSpeed = 20;
             viewModel = new ViewModel();
             DataContext = viewModel;
             timer = new DispatcherTimer();
