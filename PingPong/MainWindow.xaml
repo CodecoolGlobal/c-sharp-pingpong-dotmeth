@@ -5,23 +5,76 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PingPong"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded" KeyDown="KeyPressed">
-
+        Title="MainWindow"
+        Height="450"
+        Width="800"
+        Loaded="Window_Loaded"
+        KeyDown="KeyPressed">
+    <Window.Background>
+        <ImageBrush ImageSource="./Images/podium.jpeg"></ImageBrush>
+    </Window.Background>
     <Border Padding="0, 0, 0, 50">
 
         <Grid>
-            <Grid.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black" Offset="0"/>
-                    <GradientStop Color="White" Offset="1"/>
+            <!--<Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1"
+                                     StartPoint="0.5,0">
+                    <GradientStop Color="Black"
+                                  Offset="0" />
+                    <GradientStop Color="White"
+                                  Offset="1" />
                 </LinearGradientBrush>
-            </Grid.Background>
-            <Canvas Height="420" Width="800" Name="Canvas">
-                <Rectangle Fill="#FFCB6713" Canvas.Left="{Binding PaddleXPos}" Canvas.Top="370" HorizontalAlignment="Right" Height="14" Margin="0,0,0,0" Stroke="Black" VerticalAlignment="Bottom" Width="197" />
-                <Ellipse Width="20" Height="20" Canvas.Left="{Binding BallXPos}" Canvas.Top="{Binding BallYPos}" Fill="#FFC313CB"/>
+            </Grid.Background>-->
+            <Canvas Height="420"
+                    Width="800"
+                    Name="Canvas">
+                <Rectangle Canvas.Left="{Binding PaddleXPos}"
+                           Canvas.Top="370"
+                           HorizontalAlignment="Right"
+                           Height="14"
+                           Margin="0,0,0,0"
+                           Stroke="Black"
+                           VerticalAlignment="Bottom"
+                           Width="197">
+                    <Rectangle.Fill>
+                        <ImageBrush ImageSource="./Images/scrollbar.png" />
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Ellipse Width="20"
+                         Height="20"
+                         Canvas.Left="{Binding BallXPos}"
+                         Canvas.Top="{Binding BallYPos}">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="./Images/codecoolLogo.png" />
+                    </Ellipse.Fill>
+                </Ellipse>
             </Canvas>
-            <TextBox x:Name="Score"  HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Score: 0" VerticalAlignment="Top" Height="47" Width="98" FontSize="14" TextAlignment="Center" Foreground="#FFCBBBBB" Background="{x:Null}" BorderThickness="0"/>
-            <TextBox x:Name="pauseText" HorizontalAlignment="Left" Visibility="Collapsed" Height="122" Margin="15,134,0,0" Padding="50" TextWrapping="Wrap" Text="Press SPACE to continue" VerticalAlignment="Top" Width="274" TextAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="Score"
+                     HorizontalAlignment="Left"
+                     Margin="10,10,0,0"
+                     TextWrapping="Wrap"
+                     Text="Score: 0"
+                     VerticalAlignment="Top"
+                     Height="47"
+                     Width="98"
+                     FontSize="14"
+                     TextAlignment="Center"
+                     Foreground="Black"
+                     Background="{x:Null}"
+                     BorderThickness="0" />
+            <TextBox x:Name="pauseText"
+                     HorizontalAlignment="Left"
+                     Visibility="Collapsed"
+                     Height="122"
+                     Margin="15,134,0,0"
+                     Padding="50"
+                     TextWrapping="Wrap"
+                     Text="Press SPACE to continue"
+                     VerticalAlignment="Top"
+                     Width="274"
+                     TextAlignment="Center"
+                     Grid.Column="1"
+                     Grid.ColumnSpan="2" />
         </Grid>
     </Border>
 </Window>

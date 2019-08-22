@@ -1,22 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Threading;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-//using System.Windows.Forms;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using WPFCustomMessageBox;
 using System.Threading;
+
 
 namespace PingPong
 {
@@ -37,8 +26,18 @@ namespace PingPong
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = viewModel;
+            StartGame();
+        }
 
+        private void StartGame()
+        {
+            score = this.FindName("Score") as TextBox;
+            score.Text = "Score: 0";
+            speed = 4;
+            paddleSpeed = 20;
+            angle = RandomGenerator.GetRandomNumber(120, 240);
+            viewModel = new ViewModel();
+            DataContext = viewModel;
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(10);
             timer.Start();
@@ -52,13 +51,13 @@ namespace PingPong
                 angle = angle + (180 - 2 * angle);
             if (viewModel.BallYPos >= Canvas.ActualHeight - 25)
             {
-                //angle = angle + (180 - 2 * angle);
                 timer.Stop();
-                if (CustomMessageBox.ShowYesNo("Congratulations! You reached " + int.Parse(score.Text.Split(' ')[1]) + "points.",
+                if (CustomMessageBox.ShowYesNo("Congratulations! You reached " + int.Parse(score.Text.Split(' ')[1]) + " points.",
                                                      "Game Over",
                                                      "New game",
                                                      "Quit") == MessageBoxResult.Yes)
                 {
+                    StartGame();
                 }
                 else
                 {
@@ -85,7 +84,6 @@ namespace PingPong
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            score = this.FindName("Score") as TextBox;
             pauseInfo = this.FindName("pauseText") as TextBox;
         }
 
