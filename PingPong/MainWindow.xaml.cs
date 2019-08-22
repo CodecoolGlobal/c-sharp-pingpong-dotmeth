@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace PingPong
 {
     /// <summary>
@@ -28,7 +29,7 @@ namespace PingPong
         }
 
         private void spawnBall(object sender, RoutedEventArgs e)
-        {   
+        {
             if (ball != null)
             {
                 return;
@@ -40,12 +41,16 @@ namespace PingPong
             ball.VerticalAlignment = VerticalAlignment.Center;
             ball.Stroke = Brushes.Black;
             ball.Fill = Brushes.LightSalmon;
-            grid.Children.Add(ball);
+            int posX = RandomGenerator.GetRandomNumber(0, (int)this.ActualWidth);
+            int posY = RandomGenerator.GetRandomNumber(0, (int)this.ActualHeight);
+            Canvas.SetLeft(ball, posX);
+            Canvas.SetTop(ball, posY);
+            canvas.Children.Add(ball);
         }
 
         private void deleteBall(object sender, RoutedEventArgs e)
         {
-            grid.Children.Remove(ball);
+            canvas.Children.Remove(ball);
             ball = null;
         }
     }
