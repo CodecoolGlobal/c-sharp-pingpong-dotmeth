@@ -96,17 +96,21 @@ namespace PingPong
             else if (e.Key == Key.Space)
             {
                 Visibility status = pauseInfo.Visibility;
-                //PauseGame();
                 changePauseTextVisibility(status);
             }
             else if (e.Key == Key.Escape)
             {
+                timer.Stop();
                 if (CustomMessageBox.ShowYesNo("Are you sure to quit from the best game ever?",
                                                      "",
                                                      "Yes",
                                                      "Hell NO") == MessageBoxResult.Yes)
                 {
                     this.Close();
+                }
+                else
+                {
+                    timer.Start();
                 }
             }
         }
@@ -116,10 +120,12 @@ namespace PingPong
             if (status == Visibility.Visible)
             {
                 pauseInfo.Visibility = Visibility.Collapsed;
+                timer.Start();
             }
             else if (status == Visibility.Collapsed)
             {
                 pauseInfo.Visibility = Visibility.Visible;
+                timer.Stop();
             }
 
         }
@@ -130,11 +136,6 @@ namespace PingPong
             int scoreValue = int.Parse(score.Text.Split(' ')[1]) + 1;
             score.Text = scoreName + " " + scoreValue.ToString();
         }
-
-        //private void PauseGame()
-        //{
-        //    throw new NotImplementedException();
-        //}
 
         private bool CheckCollision()
         {
