@@ -17,7 +17,7 @@ namespace PingPong
         private TextBox pauseInfo;
         private DispatcherTimer timer;
         private ViewModel viewModel;
-        private double angle = RandomGenerator.GetRandomNumber(120, 240);
+        private double angle;
         private double speed;
         private int paddleSpeed;
 
@@ -33,6 +33,7 @@ namespace PingPong
             score.Text = "Score: 0";
             speed = 4;
             paddleSpeed = 20;
+            angle = RandomGenerator.GetRandomNumber(120, 240);
             viewModel = new ViewModel();
             DataContext = viewModel;
             timer = new DispatcherTimer();
@@ -48,7 +49,7 @@ namespace PingPong
             if (viewModel.BallYPos >= Canvas.ActualHeight - 25)
             {
                 timer.Stop();
-                if (CustomMessageBox.ShowYesNo("Congratulations! You reached " + int.Parse(score.Text.Split(' ')[1]) + "points.",
+                if (CustomMessageBox.ShowYesNo("Congratulations! You reached " + int.Parse(score.Text.Split(' ')[1]) + " points.",
                                                      "Game Over",
                                                      "New game",
                                                      "Quit") == MessageBoxResult.Yes)
