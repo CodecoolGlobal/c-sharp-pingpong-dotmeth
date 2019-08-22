@@ -16,15 +16,6 @@
     <Border Padding="0, 0, 0, 50">
 
         <Grid>
-            <!--<Grid.Background>
-                <LinearGradientBrush EndPoint="0.5,1"
-                                     StartPoint="0.5,0">
-                    <GradientStop Color="Black"
-                                  Offset="0" />
-                    <GradientStop Color="White"
-                                  Offset="1" />
-                </LinearGradientBrush>
-            </Grid.Background>-->
             <Canvas Height="420"
                     Width="800"
                     Name="Canvas">

@@ -21,7 +21,6 @@ namespace PingPong
         private double angle = 150;
         private double speed = 4;
         private int paddleSpeed = 20;
-        private bool flag = false;
 
         public MainWindow()
         {
