@@ -4,8 +4,8 @@ namespace PingPong
 {
     class ViewModel : INotifyPropertyChanged
     {
-        private Ball ball = new Ball(40, 200);
-        private int paddleXPos = 0;
+        private Ball ball = new Ball(RandomGenerator.GetRandomNumber(40, 760), RandomGenerator.GetRandomNumber(40, 120));
+        private int paddleXPos = 310;
 
         public event PropertyChangedEventHandler PropertyChanged;
 

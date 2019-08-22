@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WPFCustomMessageBox;
 
+
 namespace PingPong
 {
     /// <summary>
@@ -28,7 +29,7 @@ namespace PingPong
         private TextBox pauseInfo;
         private DispatcherTimer timer;
         private ViewModel viewModel = new ViewModel();
-        private double angle = 150;
+        private double angle = RandomGenerator.GetRandomNumber(120, 240);
         private double speed = 4;
         private int paddleSpeed = 20;
 
