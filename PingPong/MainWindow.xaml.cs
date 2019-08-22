@@ -8,11 +8,14 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+//using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPFCustomMessageBox;
 
 namespace PingPong
 {
@@ -21,7 +24,6 @@ namespace PingPong
     /// </summary>
     public partial class MainWindow : Window
     {
-
         private TextBox score;
         private TextBox pauseInfo;
         private DispatcherTimer timer;
@@ -72,7 +74,7 @@ namespace PingPong
             pauseInfo = this.FindName("pauseText") as TextBox;
         }
 
-        private void KeyPressed(object sender, KeyEventArgs e)
+        private void KeyPressed(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (e.Key == Key.Right)
             {
@@ -91,15 +93,21 @@ namespace PingPong
                 viewModel.PaddleXPos -= paddleSpeed;
             }
 
-            if (e.Key == Key.Enter)
-            {
-                IncreaseScore();
-            }
             else if (e.Key == Key.Space)
             {
                 Visibility status = pauseInfo.Visibility;
                 //PauseGame();
                 changePauseTextVisibility(status);
+            }
+            else if (e.Key == Key.Escape)
+            {
+                if (CustomMessageBox.ShowYesNo("Are you sure to quit from the best game ever?",
+                                                     "",
+                                                     "Yes",
+                                                     "Hell NO") == MessageBoxResult.Yes)
+                {
+                    this.Close();
+                }
             }
         }
 
@@ -127,9 +135,11 @@ namespace PingPong
         //{
         //    throw new NotImplementedException();
         //}
+
         private bool CheckCollision()
         {
             return viewModel.BallYPos > 350 && (viewModel.BallXPos > viewModel.PaddleXPos - 10 && viewModel.BallXPos < viewModel.PaddleXPos + 197);
         }
     }
 }
+
