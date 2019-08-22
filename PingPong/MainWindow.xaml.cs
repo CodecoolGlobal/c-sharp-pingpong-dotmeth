@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WPFCustomMessageBox;
+using System.Threading;
 
 namespace PingPong
 {
@@ -31,6 +32,7 @@ namespace PingPong
         private double angle = 150;
         private double speed = 4;
         private int paddleSpeed = 20;
+        private bool flag = false;
 
         public MainWindow()
         {
@@ -41,6 +43,7 @@ namespace PingPong
             timer.Interval = TimeSpan.FromMilliseconds(10);
             timer.Start();
             timer.Tick += dispatcherTimer_Tick;
+
         }
 
         private void dispatcherTimer_Tick(object sender, EventArgs e)
@@ -59,7 +62,7 @@ namespace PingPong
                 }
                 else
                 {
-                this.Close();
+                    this.Close();
                 }
             }
             if (viewModel.BallXPos <= 0)
@@ -67,7 +70,7 @@ namespace PingPong
             if (viewModel.BallXPos >= Canvas.ActualWidth - 35)
                 angle = angle + (360 - 2 * angle);
 
-            if(CheckCollision())
+            if (CheckCollision())
             {
                 IncreaseScore();
                 angle = angle + (180 - 2 * angle);
@@ -86,45 +89,47 @@ namespace PingPong
             pauseInfo = this.FindName("pauseText") as TextBox;
         }
 
+
+
         private void KeyPressed(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            if (e.Key == Key.Right)
+            switch (e.Key)
             {
-                if (viewModel.PaddleXPos > (Canvas.ActualWidth - 197))
-                {
-                    viewModel.PaddleXPos = (int)Canvas.ActualWidth - 197;
-                }
-                viewModel.PaddleXPos += paddleSpeed;
-            }
-            else if (e.Key == Key.Left)
-            {
-                if (viewModel.PaddleXPos < 0)
-                {
-                    viewModel.PaddleXPos = 0;
-                }
-                viewModel.PaddleXPos -= paddleSpeed;
+                case Key.Right:
+                    if (viewModel.PaddleXPos < (Canvas.ActualWidth - 192))
+                    {
+                        viewModel.PaddleXPos += paddleSpeed;
+                        Thread.Sleep(10);
+                    }
+                    break;
+
+                case Key.Left:
+                    if (!(viewModel.PaddleXPos < 0))
+                    {
+                        viewModel.PaddleXPos -= paddleSpeed;
+                    }
+                    break;
+
+                case Key.Space:
+                    Visibility status = pauseInfo.Visibility;
+                    changePauseTextVisibility(status);
+                    break;
+                case Key.Escape:
+                    timer.Stop();
+                    if (CustomMessageBox.ShowYesNo("Are you sure to quit from the best game ever?",
+                                                         "",
+                                                         "Yes",
+                                                         "Hell NO") == MessageBoxResult.Yes)
+                    {
+                        this.Close();
+                    }
+                    else
+                    {
+                        timer.Start();
+                    }
+                    break;
             }
 
-            else if (e.Key == Key.Space)
-            {
-                Visibility status = pauseInfo.Visibility;
-                changePauseTextVisibility(status);
-            }
-            else if (e.Key == Key.Escape)
-            {
-                timer.Stop();
-                if (CustomMessageBox.ShowYesNo("Are you sure to quit from the best game ever?",
-                                                     "",
-                                                     "Yes",
-                                                     "Hell NO") == MessageBoxResult.Yes)
-                {
-                    this.Close();
-                }
-                else
-                {
-                    timer.Start();
-                }
-            }
         }
 
         private void changePauseTextVisibility(Visibility status)
