@@ -96,7 +96,6 @@ namespace PingPong
                     if (viewModel.PaddleXPos < (Canvas.ActualWidth - 192))
                     {
                         viewModel.PaddleXPos += paddleSpeed;
-                        Thread.Sleep(10);
                     }
                     break;
 
