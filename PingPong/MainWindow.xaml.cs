@@ -37,11 +37,16 @@ namespace PingPong
             angle = RandomGenerator.GetRandomNumber(120, 240);
             viewModel = new ViewModel();
             DataContext = viewModel;
+
+            SetupTimer();
+        }
+
+        private void SetupTimer()
+        {
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(10);
             timer.Start();
             timer.Tick += dispatcherTimer_Tick;
-
         }
 
         private void dispatcherTimer_Tick(object sender, EventArgs e)
@@ -147,12 +152,14 @@ namespace PingPong
         {
             string scoreName = score.Text.Split(' ')[0];
             int scoreValue = int.Parse(score.Text.Split(' ')[1]) + 1;
-            score.Text = scoreName + " " + scoreValue.ToString();
+            score.Text = $"{scoreName} {scoreValue.ToString()}";
         }
 
         private bool CheckCollision()
         {
-            return viewModel.BallYPos > 350 && (viewModel.BallXPos > viewModel.PaddleXPos - 10 && viewModel.BallXPos < viewModel.PaddleXPos + 197);
+            return viewModel.BallYPos > 350
+                && (viewModel.BallXPos > viewModel.PaddleXPos - 10
+                && viewModel.BallXPos < viewModel.PaddleXPos + 197);
         }
     }
 }
