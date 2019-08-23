@@ -44,6 +44,11 @@ namespace PingPong
 
         }
 
+        /// <summary>
+        ///     Ez egy nagyon jó meth()
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
             if (viewModel.BallYPos <= 0)
