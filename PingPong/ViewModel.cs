@@ -1,4 +1,4 @@
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace PingPong
 {
@@ -19,20 +19,20 @@ namespace PingPong
 
         public double BallXPos
         {
-            get { return ball.XPos; }
+            get { return _ball.XPos; }
             set
             {
-                ball.XPos = value;
+                _ball.XPos = value;
                 OnPropertyRaised("BallXPos");
             }
         }
 
         public double BallYPos
         {
-            get { return ball.YPos; }
+            get { return _ball.YPos; }
             set
             {
-                ball.YPos = value;
+                _ball.YPos = value;
                 OnPropertyRaised("BallYPos");
             }
         }
